@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="479.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <TextArea layoutX="8.0" layoutY="247.0" prefHeight="217.0" prefWidth="606.0" text=":U28000000010000000000000000-&gt;시동ON&#10;:U28000000030000000000000002-&gt;상태:정상&#10;:U28000000050000000000000018-&gt;온도:18&#10;:U28000000070000000000000099-&gt;배터리:99&#10;:U28000000110000000000000000-&gt;도착정보:도착&#10;&#10;&#10;" />
+      <TextArea fx:id="State" layoutX="8.0" layoutY="316.0" prefHeight="148.0" prefWidth="606.0" text=":U28000000010000000000000000-&gt;시동ON&#10;:U28000000030000000000000002-&gt;상태:정상&#10;:U28000000050000000000000018-&gt;온도:18&#10;:U28000000070000000000000099-&gt;배터리:99&#10;:U28000000110000000000000000-&gt;도착정보:도착&#10;&#10;&#10;" />
       <Button fx:id="EngineOFF" layoutX="142.0" layoutY="28.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="OFF" textAlignment="CENTER" />
       <Label layoutX="393.0" layoutY="205.0" text="배터리:">
          <font>
