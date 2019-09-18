@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="479.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea layoutX="8.0" layoutY="186.0" prefHeight="278.0" prefWidth="606.0" text="################# portIdentifier_Name : COM6&#10;Port Connect : COM6&#10;################# commPort Name : //./COM6&#10;수신시작&#10;Car Control Tower Server Connect!&#10;vi에서 Car Control Tower으로 :U28000000010000000000000000 Can Serial에서 데이터를 받음&#10;:U28000000010000000000000000-&gt;시동ON&#10;vi에서  Car Control Tower으로 can 분석 데이터를 TCP/IP로 보냄 시동@ON&#10;&#10;:U28000000030000000000000002-&gt;상태:정상&#10;vi에서 Car Control Tower으로 :U28000000050000000000000018 Can Serial에서 데이터를 받음&#10;:U28000000050000000000000018-&gt;온도:18&#10;vi에서  Car Control Tower으로 can 분석 데이터를 TCP/IP로 보냄 온도@18&#10;&#10;vi에서 Car Control Tower으로 :U28000000070000000000000099 Can Serial에서 데이터를 받음&#10;:U28000000070000000000000099-&gt;배터리:99&#10;vi에서  Car Control Tower으로 can 분석 데이터를 TCP/IP로 보냄 배터리@99&#10;&#10;:U28000000110000000000000000-&gt;도착정보:도착&#10;&#10;&#10;" />
+      <Label layoutX="176.0" layoutY="91.0" text="배터리:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField alignment="CENTER" layoutX="60.0" layoutY="28.0" prefHeight="34.0" prefWidth="245.0" text="ON" />
+      <Accordion layoutX="115.0" layoutY="169.0" />
+      <Label layoutX="14.0" layoutY="28.0" prefHeight="34.0" prefWidth="39.0" text="시동:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField alignment="CENTER" layoutX="238.0" layoutY="84.0" prefHeight="34.0" prefWidth="67.0" text="99%" />
+      <Label layoutX="16.0" layoutY="91.0" text="내부온도:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField alignment="CENTER" layoutX="95.0" layoutY="84.0" prefHeight="34.0" prefWidth="67.0" text="18*C" />
+      <Label layoutX="14.0" layoutY="148.0" text="위치:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField alignment="CENTER" layoutX="339.0" layoutY="141.0" prefHeight="35.0" prefWidth="258.0" text="127.039617">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField alignment="CENTER" layoutX="62.0" layoutY="141.0" prefHeight="34.0" prefWidth="246.0" text="37.501443">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <TextField alignment="CENTER" layoutX="361.0" layoutY="28.0" prefHeight="34.0" prefWidth="234.0" text="정상" />
+      <Label layoutX="322.0" layoutY="28.0" prefHeight="34.0" prefWidth="39.0" text="상태:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="322.0" layoutY="91.0" text="도착정보:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField alignment="CENTER" layoutX="389.0" layoutY="83.0" prefHeight="34.0" prefWidth="206.0" text="도착" />
+   </children>
+</AnchorPane>
