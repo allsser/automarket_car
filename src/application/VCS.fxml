@@ -8,68 +8,74 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="479.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane prefHeight="562.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <TextArea fx:id="State" layoutX="8.0" layoutY="316.0" prefHeight="148.0" prefWidth="606.0" text=":U28000000010000000000000000-&gt;시동ON&#10;:U28000000030000000000000002-&gt;상태:정상&#10;:U28000000050000000000000018-&gt;온도:18&#10;:U28000000070000000000000099-&gt;배터리:99&#10;:U28000000110000000000000000-&gt;도착정보:도착&#10;&#10;&#10;" />
-      <Button fx:id="EngineOFF" layoutX="142.0" layoutY="28.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="OFF" textAlignment="CENTER" />
-      <Label layoutX="393.0" layoutY="205.0" text="배터리:">
+      <TextArea fx:id="State" layoutX="8.0" layoutY="264.0" prefHeight="293.0" prefWidth="606.0" />
+      <Button fx:id="EngineOFF" layoutX="141.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="OFF" textAlignment="CENTER" />
+      <Label layoutX="392.0" layoutY="226.0" text="배터리:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="Engine" alignment="CENTER" layoutX="227.0" layoutY="28.0" prefHeight="34.0" prefWidth="77.0" />
+      <TextField fx:id="Engine" alignment="CENTER" layoutX="217.0" layoutY="65.0" prefHeight="34.0" prefWidth="77.0" />
       <Accordion layoutX="115.0" layoutY="169.0" />
-      <Button fx:id="EngineOn" layoutX="62.0" layoutY="28.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="ON" textAlignment="CENTER" />
-      <Label layoutX="14.0" layoutY="28.0" prefHeight="34.0" prefWidth="39.0" text="시동:">
+      <Button fx:id="EngineOn" layoutX="61.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="ON" textAlignment="CENTER" />
+      <Label layoutX="14.0" layoutY="65.0" prefHeight="34.0" prefWidth="39.0" text="시동:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="BatteryState" alignment="CENTER" layoutX="457.0" layoutY="196.0" prefHeight="34.0" prefWidth="67.0" />
-      <Label layoutX="16.0" layoutY="91.0" text="내부온도:">
+      <TextField fx:id="BatteryState" alignment="CENTER" layoutX="456.0" layoutY="218.0" prefHeight="34.0" prefWidth="67.0" />
+      <Label layoutX="16.0" layoutY="124.0" text="내부온도:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="TempState" alignment="CENTER" layoutX="95.0" layoutY="84.0" prefHeight="34.0" prefWidth="67.0" />
-      <Label layoutX="14.0" layoutY="148.0" text="위치:">
+      <TextField fx:id="TempState" alignment="CENTER" layoutX="94.0" layoutY="116.0" prefHeight="34.0" prefWidth="67.0" />
+      <Label layoutX="18.0" layoutY="178.0" text="위치:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField alignment="CENTER" layoutX="303.0" layoutY="141.0" prefHeight="35.0" prefWidth="226.0" text="127.039617">
+      <TextField alignment="CENTER" layoutX="302.0" layoutY="169.0" prefHeight="35.0" prefWidth="226.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" layoutX="62.0" layoutY="141.0" prefHeight="34.0" prefWidth="226.0" text="37.501443">
+      <TextField alignment="CENTER" layoutX="61.0" layoutY="170.0" prefHeight="34.0" prefWidth="226.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <Label layoutX="325.0" layoutY="28.0" prefHeight="34.0" prefWidth="39.0" text="고장:">
+      <Label layoutX="314.0" layoutY="65.0" prefHeight="34.0" prefWidth="39.0" text="고장:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="Trouble2" layoutX="457.0" layoutY="28.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="고장2" textAlignment="CENTER" />
-      <Button fx:id="Trouble1" layoutX="372.0" layoutY="28.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="고장1" textAlignment="CENTER" />
-      <Button fx:id="Fix" layoutX="538.0" layoutY="28.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="정상" textAlignment="CENTER" />
-      <TextField fx:id="FixState" alignment="CENTER" layoutX="372.0" layoutY="84.0" prefHeight="34.0" prefWidth="234.0" />
-      <Label layoutX="325.0" layoutY="84.0" prefHeight="34.0" prefWidth="39.0" text="상태:">
+      <Button fx:id="Trouble2" layoutX="456.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="고장2" textAlignment="CENTER" />
+      <Button fx:id="Trouble1" layoutX="373.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="고장1" textAlignment="CENTER" />
+      <Button fx:id="Fix" layoutX="538.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="정상" textAlignment="CENTER" />
+      <TextField fx:id="FixState" alignment="CENTER" layoutX="372.0" layoutY="125.0" prefHeight="34.0" prefWidth="234.0" />
+      <Label layoutX="314.0" layoutY="116.0" prefHeight="34.0" prefWidth="39.0" text="상태:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="538.0" layoutY="140.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
-      <Label layoutX="14.0" layoutY="204.0" text="도착정보:">
+      <Button layoutX="538.0" layoutY="170.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
+      <Label layoutX="16.0" layoutY="226.0" text="도착정보:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="Delivery" layoutX="175.0" layoutY="197.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="배달중" textAlignment="CENTER" />
-      <Button fx:id="Arrival" layoutX="95.0" layoutY="197.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="도착" textAlignment="CENTER" />
-      <TextField fx:id="ArrivalState" alignment="CENTER" layoutX="257.0" layoutY="197.0" prefHeight="34.0" prefWidth="77.0" />
-      <Button fx:id="Temp" layoutX="175.0" layoutY="84.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
-      <Button fx:id="Battery" layoutX="538.0" layoutY="196.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
+      <Button fx:id="Delivery" layoutX="174.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="배달중" textAlignment="CENTER" />
+      <Button fx:id="Arrival" layoutX="94.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="도착" textAlignment="CENTER" />
+      <TextField fx:id="ArrivalState" alignment="CENTER" layoutX="256.0" layoutY="218.0" prefHeight="34.0" prefWidth="77.0" />
+      <Button fx:id="Temp" layoutX="174.0" layoutY="116.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
+      <Button fx:id="Battery" layoutX="538.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
+      <Button fx:id="Conn" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="134.0" text="COM연결" textAlignment="CENTER" />
+      <Label layoutX="11.0" layoutY="14.0" prefHeight="34.0" prefWidth="258.0" text="VCS(Vehicle Can Simulator)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
