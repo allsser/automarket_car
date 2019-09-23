@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class MainController {
+public class VCSController {
 	@FXML
 	private TextField Engine;
 	@FXML
@@ -283,7 +283,15 @@ public class MainController {
 
 				msg = "W280000000500000000000000";
 				String temp = TempState.getText();
-				msg = msg + temp;
+				
+				if(temp.length() == 3) {
+					msg = "W28000000050000000000000100";
+				} else if(temp.length() == 2) {
+					msg = msg + temp;					
+				} else if (temp.length() == 1) {
+					temp = "0" + temp;
+					msg = msg + temp;
+				}
 				checksum = getCheckSum(msg).toUpperCase();
 				msg = start + msg + checksum + end;
 
@@ -311,7 +319,16 @@ public class MainController {
 
 				msg = "W280000000700000000000000";
 				String battery = BatteryState.getText();
-				msg = msg + battery;
+
+				if(battery.length() == 3) {
+					msg = "W28000000070000000000000100";
+				} else if(battery.length() == 2) {
+					msg = msg + battery;					
+				} else if (battery.length() == 1) {
+					battery = "0" + battery;
+					msg = msg + battery;
+				}
+				
 				checksum = getCheckSum(msg).toUpperCase();
 				msg = start + msg + checksum + end;
 
