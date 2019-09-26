@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="562.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.VCSController">
    <children>
-      <TextArea fx:id="State" layoutX="8.0" layoutY="264.0" prefHeight="293.0" prefWidth="606.0" />
+      <TextArea fx:id="State" layoutX="8.0" layoutY="309.0" prefHeight="249.0" prefWidth="606.0" />
       <Button fx:id="EngineOFF" layoutX="141.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="OFF" textAlignment="CENTER" />
       <Label layoutX="392.0" layoutY="226.0" text="배터리:">
          <font>
@@ -31,17 +31,17 @@
          </font>
       </Label>
       <TextField fx:id="TempState" alignment="CENTER" layoutX="94.0" layoutY="116.0" prefHeight="34.0" prefWidth="67.0" />
-      <Label layoutX="18.0" layoutY="178.0" text="위치:">
+      <Label layoutX="18.0" layoutY="178.0" text="위도:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField alignment="CENTER" layoutX="302.0" layoutY="169.0" prefHeight="35.0" prefWidth="226.0">
+      <TextField fx:id="Longitude" alignment="CENTER" layoutX="369.0" layoutY="169.0" prefHeight="35.0" prefWidth="160.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" layoutX="61.0" layoutY="170.0" prefHeight="34.0" prefWidth="226.0">
+      <TextField fx:id="Latitude" alignment="CENTER" layoutX="61.0" layoutY="170.0" prefHeight="34.0" prefWidth="160.0">
          <font>
             <Font size="17.0" />
          </font>
@@ -54,13 +54,13 @@
       <Button fx:id="Trouble2" layoutX="456.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="고장2" textAlignment="CENTER" />
       <Button fx:id="Trouble1" layoutX="373.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="고장1" textAlignment="CENTER" />
       <Button fx:id="Fix" layoutX="538.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="정상" textAlignment="CENTER" />
-      <TextField fx:id="FixState" alignment="CENTER" layoutX="372.0" layoutY="125.0" prefHeight="34.0" prefWidth="234.0" />
+      <TextField fx:id="FixState" alignment="CENTER" layoutX="367.0" layoutY="125.0" prefHeight="34.0" prefWidth="239.0" />
       <Label layoutX="314.0" layoutY="116.0" prefHeight="34.0" prefWidth="39.0" text="상태:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="538.0" layoutY="170.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
+      <Button fx:id="LongBtn" layoutX="538.0" layoutY="170.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
       <Label layoutX="16.0" layoutY="226.0" text="도착정보:">
          <font>
             <Font size="14.0" />
@@ -77,5 +77,20 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button fx:id="LatiBtn" layoutX="227.0" layoutY="170.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
+      <Label layoutX="314.0" layoutY="169.0" prefHeight="34.0" prefWidth="39.0" text="경도:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="272.0" text="회수정보:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="GoodState" layoutX="308.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="78.0" text="정상" textAlignment="CENTER" />
+      <Button fx:id="Complete" layoutX="186.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="110.0" text="회수완료" textAlignment="CENTER" />
+      <Button fx:id="Recall" layoutX="94.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="78.0" text="회수중" textAlignment="CENTER" />
+      <TextField fx:id="CompleteState" alignment="CENTER" layoutX="400.0" layoutY="264.0" prefHeight="34.0" prefWidth="126.0" />
    </children>
 </AnchorPane>

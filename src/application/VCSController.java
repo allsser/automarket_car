@@ -48,6 +48,22 @@ public class VCSController {
 	private Button Battery;
 	@FXML
 	private Button Conn;
+	@FXML
+	private TextField Latitude; //위도
+	@FXML
+	private TextField Longitude; //경도
+	@FXML
+	private Button LatiBtn;
+	@FXML
+	private Button LongBtn;
+	@FXML
+	private Button Recall;
+	@FXML
+	private Button Complete;
+	@FXML
+	private Button GoodState;
+	@FXML
+	private TextField CompleteState;
 	
 	// 사용할 COM 포트를 지정하기 위해서 필요.
 	private CommPortIdentifier portIdentifier;
@@ -352,7 +368,96 @@ public class VCSController {
 				
 			}
 		});
+		
+		// 위도
+		LatiBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				String start = ":";
+				String msg = "";
+				String checksum = "";
+				String end = "\r";
 
+				msg = "W2800000011";
+				msg = msg + "00000000"+Latitude.getText();	
+				checksum = getCheckSum(msg).toUpperCase();
+				msg = start + msg + checksum + end;
+				printMsg("위도 :" + msg);
+
+				byte[] inputData = msg.getBytes();
+				try {
+					out.write(inputData);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		// 경도
+		LongBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				String start = ":";
+				String msg = "";
+				String checksum = "";
+				String end = "\r";
+				
+				msg = "W2800000011";
+				msg = msg + "0000000"+Longitude.getText();	
+				checksum = getCheckSum(msg).toUpperCase();
+				msg = start + msg + checksum + end;
+				printMsg("경도 :" + msg);
+				
+				byte[] inputData = msg.getBytes();
+				try {
+					out.write(inputData);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		Recall.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				CompleteState.setText("회수중");
+				printMsg("회수중");
+				String msg = ":W2800000013000000000000000045\r";
+				byte[] inputData = msg.getBytes();
+				try {
+					out.write(inputData);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		Complete.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				CompleteState.setText("회수완료");
+				printMsg("회수완료");
+				String msg = ":W2800000013000000000000000146\r";
+				byte[] inputData = msg.getBytes();
+				try {
+					out.write(inputData);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		GoodState.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				CompleteState.setText("정상");
+				printMsg("정상");
+				String msg = ":W2800000013000000000000000247\r";
+				byte[] inputData = msg.getBytes();
+				try {
+					out.write(inputData);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});	
 	}
-
 }

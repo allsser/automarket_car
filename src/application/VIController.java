@@ -4,7 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -35,12 +38,23 @@ public class VIController {
 	private Button Conn;
 	@FXML
 	private Button Server;
+	@FXML
+	private TextField LatiState;
+	@FXML
+	private TextField LongiState;
+	@FXML
+	private TextField CarName;
+	@FXML
+	private TextField CompleteState;
+	
 	
 	private CommPortIdentifier portIdentifier;
 	private CommPort commPort;
 	private SerialPort serialPort;
 	private BufferedInputStream bis;
 	private OutputStream out;
+	
+	ExecutorService executorService = Executors.newCachedThreadPool();
 	
 	private void printMsg(String msg) {
 		State.appendText(msg + "\n");
@@ -55,9 +69,14 @@ public class VIController {
 		String Trouble2 = ":U2800000003000000000000000143";
 		String Fix = ":U2800000003000000000000000244";
 		String Arrival = ":U2800000009000000000000000048";
-		String Delivery = ":W2800000009000000000000000149";
-		String Temp = ":W2800000005";
-		String Battery = ":W2800000007";
+		String Delivery = ":U2800000009000000000000000149";
+		String Temp = ":U2800000005";
+		String Battery = ":U2800000007";
+		String Latitude = ":U280000001100000000";
+		String Longitude = ":U28000000110000000";
+		String Recall = ":U2800000013000000000000000043";
+		String Complete = ":U2800000013000000000000000144";
+		String GoodState = ":U28000013000000000000000245";
 		
 		@Override
 		public void serialEvent(SerialPortEvent event) {
@@ -102,14 +121,42 @@ public class VIController {
 						printMsg("배달중");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Temp)) {
-						String temp = result.substring(27, 29);
+						String temp = result.substring(26, 28);
 						TempState.setText(temp);
 						printMsg("온도 : "+ temp + "도");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Battery)) {
-						String battery = result.substring(27, 29);
+						String battery = result.substring(26, 28);
 						BatteryState.setText(battery);
 						printMsg("배터리 : "+ battery + "%");
+						printMsg("받은 메시지는 : " + result);
+					} else if(result.contains(Latitude)) {
+						String latitude;
+						String left = result.substring(20, 22);
+						String right = result.substring(22, 28);
+						latitude = left + "." + right;
+						LatiState.setText(latitude);
+						printMsg("경도 :"+latitude);
+						printMsg("받은 메세지는 : " + result);
+					} else if(result.contains(Longitude)) {
+						String longitude;
+						String left = result.substring(19, 22);
+						String right = result.substring(22, 28);
+						longitude = left + "." + right;
+						LongiState.setText(longitude);
+						printMsg("위도 :"+longitude);
+						printMsg("받은 메세지는 : " + result);
+					} else if(result.contains(Recall)){
+						CompleteState.setText("회수중");
+						printMsg("회수중");
+						printMsg("받은 메시지는 : " + result);
+					} else if(result.contains(Complete)){
+						CompleteState.setText("회수완료");
+						printMsg("회수완료");
+						printMsg("받은 메시지는 : " + result);
+					} else if(result.contains(GoodState)){
+						CompleteState.setText("정상");
+						printMsg("정상");
 						printMsg("받은 메시지는 : " + result);
 					}
 				} catch (Exception e) {
@@ -178,6 +225,31 @@ public class VIController {
 			System.out.println(e);
 		}
 	}
+	
+	class ReceiveRunnable implements Runnable {
+		//서버로 부터 들어오는 메시지를 받아들이는 역할을 수행
+		//소켓에 대한 입력스트림만 있으면 됨
+		private BufferedReader br;
+		
+		public ReceiveRunnable(BufferedReader br) {
+			super();
+			this.br = br;
+		}
+
+		@Override
+		public void run() {
+			String line = "";
+			try {
+				while((line=br.readLine())!=null) {
+					printMsg(line);
+				}
+			}catch(Exception e) {
+				
+			}
+		}
+		
+	}
+		
 	public void clickHandler() {
 		// 연결
 		Conn.setOnAction(new EventHandler<ActionEvent>() {
@@ -194,15 +266,20 @@ public class VIController {
 			public void handle(ActionEvent event) {			
 				try {
 					// 클라이언트는 버튼을 누르면 서버쪽에 Socket접속을 시도.
-					Socket socket = new Socket("127.0.0.1", 5554);
+					Socket socket = new Socket("127.0.0.1",7848);
 					// 만약에 접속에 성공하면 socket객체를 하나 획득.
-					InputStreamReader isr = new InputStreamReader(socket.getInputStream());
-					BufferedReader br = new BufferedReader(isr);
-					String msg = br.readLine();
-					printMsg(msg);
-					br.close();
-					isr.close();
-					socket.close();
+					
+					BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+					PrintWriter out1 = new PrintWriter(socket.getOutputStream());				
+					printMsg("서버 접속 성공");
+					
+					String msg = CarName.getText();
+					out1.println(msg);
+					out1.flush();
+					printMsg("차 : "+msg);
+									
+					ReceiveRunnable runnable = new ReceiveRunnable(br);
+					executorService.execute(runnable);
 				} catch (Exception e) {
 					System.out.println(e);
 				}				
@@ -210,4 +287,5 @@ public class VIController {
 		});
 	}
 }
+
 
