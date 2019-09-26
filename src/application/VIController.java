@@ -76,7 +76,7 @@ public class VIController {
 		String Longitude = ":U28000000110000000";
 		String Recall = ":U2800000013000000000000000043";
 		String Complete = ":U2800000013000000000000000144";
-		String GoodState = ":U28000013000000000000000245";
+		String GoodState = ":U2800000013000000000000000245";
 		
 		@Override
 		public void serialEvent(SerialPortEvent event) {
