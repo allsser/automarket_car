@@ -98,6 +98,8 @@ public class VCSController {
 	
 	// inner class형식으로 event처리 listener class를 작성
 	class MyPortListener implements SerialPortEventListener{
+		
+		String Recall = ":U2800000013000000000000000043";
 
 		@Override
 		public void serialEvent(SerialPortEvent event) {
@@ -112,6 +114,12 @@ public class VCSController {
 					}
 					String result = new String(writeBuffer);
 					printMsg("보낸 메시지는 : " + result);
+					
+					if(result.contains(Recall)) {
+						CompleteState.setText("회수중");
+						printMsg("관리자가 회수요청했습니다.");
+						printMsg("받은 메시지는 : "+ result);
+					}
 				} catch (Exception e) {
 					System.out.println(e);
 				}
