@@ -6,8 +6,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -27,25 +30,25 @@ public class VIController {
 	@FXML
 	private TextField TempState; 
 	@FXML
-	private TextField BatteryState;
+	private TextField BatteryState = null;
 	@FXML
-	private TextField FixState;
+	private TextField FixState = null;
 	@FXML
-	private TextField ArrivalState;
+	private TextField ArrivalState = null;
 	@FXML
-	private TextArea State;
+	private TextArea State = null;
 	@FXML
-	private Button Conn;
+	private Button Conn = null;
 	@FXML
-	private Button Server;
+	private Button Server = null;
 	@FXML
-	private TextField LatiState;
+	private TextField LatiState = null;
 	@FXML
-	private TextField LongiState;
+	private TextField LongiState = null;
 	@FXML
-	private TextField CarName;
+	private TextField CarName = null;
 	@FXML
-	private TextField CompleteState;
+	private TextField CompleteState = null;
 	
 	
 	private CommPortIdentifier portIdentifier;
@@ -159,6 +162,20 @@ public class VIController {
 						printMsg("정상");
 						printMsg("받은 메시지는 : " + result);
 					}
+					
+//					if((EngineState.getText() != null) && (FixState.getText() != null)) {
+//						Socket socket = new Socket("127.0.0.1",7848);
+//						PrintWriter out1 = new PrintWriter(socket.getOutputStream());	
+//						//&& (TempState != null) && (BatteryState != null) && (FixState != null) && (LatiState != null) && (LongiState != null) && (CompleteState != null) && (CarName != null)) {
+//						String send = "/10000202/1";
+//						out1.println(send);
+//						out1.flush();
+//						printMsg("test1:" + EngineState.getText().toString());
+//						printMsg("test1:" + FixState.getText().toString());
+//						printMsg("testtest:" + EngineState.toString());
+//					
+//						printMsg("데이터를 보냈습니다.");
+//					}
 				} catch (Exception e) {
 					System.out.println(e);
 				}
@@ -241,7 +258,18 @@ public class VIController {
 			String line = "";
 			try {
 				while((line=br.readLine())!=null) {
-					printMsg(line);
+					printMsg("test" + line);
+					if(line.contains("/10000001/")) {
+						CompleteState.setText("회수중");
+						printMsg("회수중");
+						String msg = ":W2800000013000000000000000045\r";
+						byte[] inputData = msg.getBytes();
+						try {
+							out.write(inputData);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} 
 				}
 			}catch(Exception e) {
 				
@@ -260,6 +288,8 @@ public class VIController {
 						
 			}
 		});
+		
+		
 		
 		Server.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
