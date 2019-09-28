@@ -30,25 +30,25 @@ public class VIController {
 	@FXML
 	private TextField TempState; 
 	@FXML
-	private TextField BatteryState = null;
+	private TextField BatteryState;
 	@FXML
-	private TextField FixState = null;
+	private TextField FixState;
 	@FXML
-	private TextField ArrivalState = null;
+	private TextField ArrivalState;
 	@FXML
-	private TextArea State = null;
+	private TextArea State;
 	@FXML
-	private Button Conn = null;
+	private Button Conn;
 	@FXML
-	private Button Server = null;
+	private Button Server;
 	@FXML
-	private TextField LatiState = null;
+	private TextField LatiState;
 	@FXML
-	private TextField LongiState = null;
+	private TextField LongiState;
 	@FXML
-	private TextField CarName = null;
+	private TextField CarName;
 	@FXML
-	private TextField CompleteState = null;
+	private TextField CompleteState;
 	
 	
 	private CommPortIdentifier portIdentifier;
@@ -56,6 +56,10 @@ public class VIController {
 	private SerialPort serialPort;
 	private BufferedInputStream bis;
 	private OutputStream out;
+	
+	Socket socket;
+	BufferedReader br;
+	PrintWriter out1;			
 	
 	ExecutorService executorService = Executors.newCachedThreadPool();
 	
@@ -81,8 +85,14 @@ public class VIController {
 		String Complete = ":U2800000013000000000000000144";
 		String GoodState = ":U2800000013000000000000000245";
 		
+		String Engine = null;
+		String test1 = null;
+		String test2 = null;
+		String test3 = null;
+		
 		@Override
 		public void serialEvent(SerialPortEvent event) {
+			
 			// Serial Port에서 EVENT가 발생하면 호출
 			if(event.getEventType() == 
 					SerialPortEvent.DATA_AVAILABLE) {
@@ -97,22 +107,27 @@ public class VIController {
 	
 					if(result.contains(EngineON)) {
 						EngineState.setText("ON");
+						Engine = "1";
 						printMsg("ON");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(EngineOFF)){
 						EngineState.setText("OFF");
+						Engine = "0";
 						printMsg("OFF");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Trouble1)){
 						FixState.setText("고장1");
+						test1 = "Trouble1";
 						printMsg("고장1");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Trouble2)){
 						FixState.setText("고장2");
+						test1 = "Trouble2";
 						printMsg("고장2");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Fix)){
 						FixState.setText("정상");
+						test1 = "Fix";
 						printMsg("정상");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Arrival)){
@@ -161,25 +176,27 @@ public class VIController {
 						CompleteState.setText("정상");
 						printMsg("정상");
 						printMsg("받은 메시지는 : " + result);
-					}
-					
-//					if((EngineState.getText() != null) && (FixState.getText() != null)) {
-//						Socket socket = new Socket("127.0.0.1",7848);
-//						PrintWriter out1 = new PrintWriter(socket.getOutputStream());	
-//						//&& (TempState != null) && (BatteryState != null) && (FixState != null) && (LatiState != null) && (LongiState != null) && (CompleteState != null) && (CarName != null)) {
+					} 
+//					if((test != null) && (test1 != null)) {
+//						
+//						//PrintWriter out1 = new PrintWriter(socket.getOutputStream());	
 //						String send = "/10000202/1";
 //						out1.println(send);
 //						out1.flush();
-//						printMsg("test1:" + EngineState.getText().toString());
-//						printMsg("test1:" + FixState.getText().toString());
-//						printMsg("testtest:" + EngineState.toString());
-//					
 //						printMsg("데이터를 보냈습니다.");
 //					}
 				} catch (Exception e) {
 					System.out.println(e);
 				}
-			}	
+			} 
+			if((test != null) && (test1 != null)) {
+				
+				//PrintWriter out1 = new PrintWriter(socket.getOutputStream());	
+				String send = "/10000202/1";
+				out1.println(send);
+				out1.flush();
+				printMsg("데이터를 보냈습니다.");
+			}
 		}
 	}
 		
@@ -283,7 +300,7 @@ public class VIController {
 		Conn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {			
-				String portName = "COM6";
+				String portName = "COM7";
 				connectPort(portName);
 						
 			}
@@ -296,11 +313,11 @@ public class VIController {
 			public void handle(ActionEvent event) {			
 				try {
 					// 클라이언트는 버튼을 누르면 서버쪽에 Socket접속을 시도.
-					Socket socket = new Socket("127.0.0.1",7848);
+					socket = new Socket("127.0.0.1",7848);
 					// 만약에 접속에 성공하면 socket객체를 하나 획득.
 					
-					BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-					PrintWriter out1 = new PrintWriter(socket.getOutputStream());				
+					br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+					out1 = new PrintWriter(socket.getOutputStream());				
 					printMsg("서버 접속 성공");
 					
 					String msg = CarName.getText();
@@ -308,6 +325,8 @@ public class VIController {
 					out1.flush();
 					printMsg("차 : "+msg);
 									
+					
+					
 					ReceiveRunnable runnable = new ReceiveRunnable(br);
 					executorService.execute(runnable);
 				} catch (Exception e) {
@@ -316,6 +335,7 @@ public class VIController {
 			}
 		});
 	}
+	
 }
 
 
