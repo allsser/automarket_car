@@ -365,6 +365,7 @@ public class VIController {
 					out1.println(Conn+CarNum);
 					out1.flush();
 					printMsg("Â÷ : "+CarNum);
+					
 													
 					ReceiveRunnable runnable = new ReceiveRunnable(br);
 					executorService.execute(runnable);
