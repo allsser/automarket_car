@@ -197,7 +197,7 @@ public class VIController {
 						printMsg("받은 메시지는 : " + result);
 						String send = "/10000002/1";
 						out1.println(send);
-						out.flush();
+						out1.flush();
 					} 
 				} catch (Exception e) {
 					System.out.println(e);
