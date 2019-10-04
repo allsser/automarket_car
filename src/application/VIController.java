@@ -214,13 +214,13 @@ public class VIController {
 				int Temper =Integer.parseInt(Temperature);
 				int Batt =Integer.parseInt(Battery1);
 				
-				obj.put("CarStatus", CarStatus);
-				obj.put("DestLati", DestLa);
-				obj.put("DestLong", DestLo);
-				obj.put("Temperature", Temper);
-				obj.put("Battery1", Batt);
-				obj.put("CarStart", CarStart);
-				obj.put("CarError", CarError);
+				obj.put("carstatus", CarStatus);
+				obj.put("latitude", DestLa);
+				obj.put("longitude", DestLo);
+				obj.put("temp", Temper);
+				obj.put("battery", Batt);
+				obj.put("startflag", CarStart);
+				obj.put("error", CarError);
 
 				String json = obj.toJSONString();
 				
@@ -337,7 +337,7 @@ public class VIController {
 		Conn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {			
-				String portName = "COM3";
+				String portName = "COM7";
 				connectPort(portName);
 						
 			}
