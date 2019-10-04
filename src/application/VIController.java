@@ -232,6 +232,7 @@ public class VIController {
 				out1.println(send);
 				out1.flush();
 				printMsg("데이터를 보냈습니다.");
+				
 			}
 		}
 	}
