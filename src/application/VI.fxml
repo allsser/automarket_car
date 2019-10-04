@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="533.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.VIController">
+<AnchorPane prefHeight="533.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.VIController">
    <children>
-      <TextArea fx:id="State" layoutX="8.0" layoutY="279.0" onDragDetected="#clickHandler" prefHeight="245.0" prefWidth="590.0" />
+      <TextArea fx:id="State" layoutX="8.0" layoutY="233.0" onDragDetected="#clickHandler" prefHeight="291.0" prefWidth="590.0" />
       <Label layoutX="172.0" layoutY="150.0" text="배터리:">
          <font>
             <Font size="14.0" />
@@ -29,7 +29,7 @@
          </font>
       </Label>
       <TextField fx:id="TempState" alignment="CENTER" layoutX="81.0" layoutY="142.0" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" />
-      <Label layoutX="18.0" layoutY="197.0" text="위도:">
+      <Label layoutX="17.0" layoutY="197.0" text="위도:">
          <font>
             <Font size="14.0" />
          </font>
@@ -50,12 +50,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="331.0" layoutY="150.0" text="도착정보:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="ArrivalState" alignment="CENTER" layoutX="402.0" layoutY="142.0" onAction="#clickHandler" prefHeight="34.0" prefWidth="192.0" />
       <Button fx:id="Conn" layoutX="229.0" layoutY="25.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="46.0" prefWidth="98.0" text="COM연결">
          <font>
             <Font size="14.0" />
@@ -77,12 +71,12 @@
          </font>
       </Label>
       <TextField fx:id="CarName" alignment="CENTER" layoutX="351.0" layoutY="31.0" onAction="#clickHandler" prefHeight="34.0" prefWidth="123.0" />
-      <Label layoutX="18.0" layoutY="242.0" text="회수정보:">
+      <Label layoutX="328.0" layoutY="150.0" text="차상태:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="CompleteState" alignment="CENTER" layoutX="81.0" layoutY="234.0" onAction="#clickHandler" prefHeight="34.0" prefWidth="222.0">
+      <TextField fx:id="CompleteState" alignment="CENTER" layoutX="382.0" layoutY="142.0" onAction="#clickHandler" prefHeight="34.0" prefWidth="210.0">
          <font>
             <Font size="17.0" />
          </font>

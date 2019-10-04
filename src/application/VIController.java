@@ -7,10 +7,18 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -33,8 +41,6 @@ public class VIController {
 	private TextField BatteryState;
 	@FXML
 	private TextField FixState;
-	@FXML
-	private TextField ArrivalState;
 	@FXML
 	private TextArea State;
 	@FXML
@@ -67,9 +73,10 @@ public class VIController {
 		State.appendText(msg + "\n");
 	}
 	
+	
 	// inner class형식으로 event처리 listener class를 작성
 	class MyPortListener implements SerialPortEventListener{
-
+		
 		String EngineON = ":U2800000001000000000000000040";
 		String EngineOFF = ":U2800000001000000000000000141";
 		String Trouble1 = ":U2800000003000000000000000042";
@@ -85,10 +92,13 @@ public class VIController {
 		String Complete = ":U2800000013000000000000000144";
 		String GoodState = ":U2800000013000000000000000245";
 		
-		String Engine = null;
-		String test1 = null;
-		String test2 = null;
-		String test3 = null;
+		String CarStart = null;
+		String CarError = null;
+		String CarStatus = null;
+		String Battery1 = null;
+		String Temperature = null;
+		String DestLati = null;
+		String DestLong = null;
 		
 		@Override
 		public void serialEvent(SerialPortEvent event) {
@@ -107,45 +117,39 @@ public class VIController {
 	
 					if(result.contains(EngineON)) {
 						EngineState.setText("ON");
-						Engine = "1";
+						CarStart = "1";
 						printMsg("ON");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(EngineOFF)){
 						EngineState.setText("OFF");
-						Engine = "0";
+						CarStart = "0";
 						printMsg("OFF");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Trouble1)){
 						FixState.setText("고장1");
-						test1 = "Trouble1";
+						CarError = "01";
 						printMsg("고장1");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Trouble2)){
 						FixState.setText("고장2");
-						test1 = "Trouble2";
+						CarError = "02";
 						printMsg("고장2");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Fix)){
 						FixState.setText("정상");
-						test1 = "Fix";
+						CarError = "00";
 						printMsg("정상");
-						printMsg("받은 메시지는 : " + result);
-					} else if(result.contains(Arrival)){
-						ArrivalState.setText("도착");
-						printMsg("도착");
-						printMsg("받은 메시지는 : " + result);
-					} else if(result.contains(Delivery)){
-						ArrivalState.setText("배달중");
-						printMsg("배달중");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Temp)) {
 						String temp = result.substring(26, 28);
 						TempState.setText(temp);
+						Temperature = temp;
 						printMsg("온도 : "+ temp + "도");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Battery)) {
 						String battery = result.substring(26, 28);
 						BatteryState.setText(battery);
+						Battery1 = battery;
 						printMsg("배터리 : "+ battery + "%");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Latitude)) {
@@ -154,6 +158,7 @@ public class VIController {
 						String right = result.substring(22, 28);
 						latitude = left + "." + right;
 						LatiState.setText(latitude);
+						DestLati = latitude;
 						printMsg("경도 :"+latitude);
 						printMsg("받은 메세지는 : " + result);
 					} else if(result.contains(Longitude)) {
@@ -161,38 +166,69 @@ public class VIController {
 						String left = result.substring(19, 22);
 						String right = result.substring(22, 28);
 						longitude = left + "." + right;
+						DestLong = longitude;
 						LongiState.setText(longitude);
 						printMsg("위도 :"+longitude);
 						printMsg("받은 메세지는 : " + result);
+					} else if(result.contains(GoodState)){
+						CompleteState.setText("정상");
+						CarStatus = "00";
+						printMsg("정상");
+						printMsg("받은 메시지는 : " + result);
+					} else if(result.contains(Delivery)){
+						CompleteState.setText("배달중");
+						CarStatus = "01";
+						printMsg("배달중");
+						printMsg("받은 메시지는 : " + result);
+					} else if(result.contains(Arrival)){
+						CompleteState.setText("도착");
+						CarStatus = "02";
+						printMsg("도착");
+						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Recall)){
 						CompleteState.setText("회수중");
+						CarStatus = "03";
 						printMsg("회수중");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Complete)){
 						CompleteState.setText("회수완료");
+						CarStatus = "04";
 						printMsg("회수완료");
 						printMsg("받은 메시지는 : " + result);
-					} else if(result.contains(GoodState)){
-						CompleteState.setText("정상");
-						printMsg("정상");
-						printMsg("받은 메시지는 : " + result);
+						String send = "/10000002/1";
+						out1.println(send);
+						out.flush();
 					} 
-//					if((test != null) && (test1 != null)) {
-//						
-//						//PrintWriter out1 = new PrintWriter(socket.getOutputStream());	
-//						String send = "/10000202/1";
-//						out1.println(send);
-//						out1.flush();
-//						printMsg("데이터를 보냈습니다.");
-//					}
 				} catch (Exception e) {
 					System.out.println(e);
 				}
 			} 
-			if((test != null) && (test1 != null)) {
+			if((CarStatus != null) && (DestLati != null) && (DestLong != null) 
+					&& (Temperature != null) && (Battery1 != null) && (CarStart != null) && (CarError != null)) {
+			
+
+				JSONObject obj = new JSONObject();
 				
-				//PrintWriter out1 = new PrintWriter(socket.getOutputStream());	
-				String send = "/10000202/1";
+				Double DestLa = Double.parseDouble(DestLati);
+				Double DestLo = Double.parseDouble(DestLong);
+				int Temper =Integer.parseInt(Temperature);
+				int Batt =Integer.parseInt(Battery1);
+				
+				obj.put("CarStatus", CarStatus);
+				obj.put("DestLati", DestLa);
+				obj.put("DestLong", DestLo);
+				obj.put("Temperature", Temper);
+				obj.put("Battery1", Batt);
+				obj.put("CarStart", CarStart);
+				obj.put("CarError", CarError);
+
+				String json = obj.toJSONString();
+				
+				printMsg(json);
+				
+				String CarNum = CarName.getText();
+				printMsg(CarNum);
+				String send = "/10000202/"+CarNum+"/"+json;
 				out1.println(send);
 				out1.flush();
 				printMsg("데이터를 보냈습니다.");
@@ -276,7 +312,8 @@ public class VIController {
 			try {
 				while((line=br.readLine())!=null) {
 					printMsg("test" + line);
-					if(line.contains("/10000001/")) {
+					String CarNum = CarName.getText();
+					if(line.contains("/10000001/"+CarNum)) {
 						CompleteState.setText("회수중");
 						printMsg("회수중");
 						String msg = ":W2800000013000000000000000045\r";
@@ -300,7 +337,7 @@ public class VIController {
 		Conn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {			
-				String portName = "COM7";
+				String portName = "COM3";
 				connectPort(portName);
 						
 			}
@@ -320,13 +357,14 @@ public class VIController {
 					out1 = new PrintWriter(socket.getOutputStream());				
 					printMsg("서버 접속 성공");
 					
-					String msg = CarName.getText();
-					out1.println(msg);
+					String Conn = "/10000000/";
+					
+					String CarNum = CarName.getText();
+					
+					out1.println(Conn+CarNum);
 					out1.flush();
-					printMsg("차 : "+msg);
-									
-					
-					
+					printMsg("차 : "+CarNum);
+													
 					ReceiveRunnable runnable = new ReceiveRunnable(br);
 					executorService.execute(runnable);
 				} catch (Exception e) {

@@ -23,8 +23,6 @@ public class VCSController {
 	@FXML
 	private TextField TempState;
 	@FXML
-	private TextField ArrivalState;
-	@FXML
 	private TextField BatteryState;
 	@FXML
 	private TextArea State;
@@ -122,7 +120,7 @@ public class VCSController {
 					}
 				} catch (Exception e) {
 					System.out.println(e);
-				}
+				}					
 			}	
 		}
 	}
@@ -269,8 +267,8 @@ public class VCSController {
 		Arrival.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				ArrivalState.setText("도착");
-				printMsg("도착");
+				CompleteState.setText("배송완료");
+				printMsg("배송완료");
 				String msg = ":W280000000900000000000000004A\r";
 				byte[] inputData = msg.getBytes();
 				try {
@@ -283,8 +281,8 @@ public class VCSController {
 		Delivery.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				ArrivalState.setText("배달중");
-				printMsg("배달중");
+				CompleteState.setText("이동중");
+				printMsg("이동중");
 				String msg = ":W280000000900000000000000014B\r";
 				byte[] inputData = msg.getBytes();
 				try {
@@ -371,7 +369,7 @@ public class VCSController {
 		Conn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				String portName = "COM7";
+				String portName = "COM4";
 				connectPort(portName);
 				
 			}
@@ -456,8 +454,8 @@ public class VCSController {
 		GoodState.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				CompleteState.setText("정상");
-				printMsg("정상");
+				CompleteState.setText("기본값");
+				printMsg("기본값");
 				String msg = ":W2800000013000000000000000247\r";
 				byte[] inputData = msg.getBytes();
 				try {
