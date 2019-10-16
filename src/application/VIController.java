@@ -114,6 +114,8 @@ public class VIController {
 						bis.read(readBuffer);
 					}
 					String result = new String(readBuffer);
+					
+					String CarNum = CarName.getText();
 	
 					if(result.contains(EngineON)) {
 						EngineState.setText("ON");
@@ -185,6 +187,9 @@ public class VIController {
 						CarStatus = "02";
 						printMsg("도착");
 						printMsg("받은 메시지는 : " + result);
+						String send = "/10000103/"+CarNum;
+						out1.println(send);
+						out1.flush();
 					} else if(result.contains(Recall)){
 						CompleteState.setText("회수중");
 						CarStatus = "03";
@@ -195,7 +200,7 @@ public class VIController {
 						CarStatus = "04";
 						printMsg("회수완료");
 						printMsg("받은 메시지는 : " + result);
-						String send = "/10000002/1";
+						String send = "/10000002/"+CarNum;
 						out1.println(send);
 						out1.flush();
 					} 
@@ -228,7 +233,7 @@ public class VIController {
 				
 				String CarNum = CarName.getText();
 				printMsg(CarNum);
-				String send = "/10000202/"+CarNum+"/"+json;
+				String send = "C/10000202/"+CarNum+"/"+json;
 				out1.println(send);
 				out1.flush();
 				printMsg("데이터를 보냈습니다.");
@@ -312,9 +317,10 @@ public class VIController {
 			String line = "";
 			try {
 				while((line=br.readLine())!=null) {
-					printMsg("test" + line);
+					line = "C"+line;
+					printMsg(line +"-> 회수 요청");
 					String CarNum = CarName.getText();
-					if(line.contains("/10000001/"+CarNum)) {
+					if(line.contains("C/10000001/"+CarNum)) {
 						CompleteState.setText("회수중");
 						printMsg("회수중");
 						String msg = ":W2800000013000000000000000045\r";
@@ -358,7 +364,7 @@ public class VIController {
 					out1 = new PrintWriter(socket.getOutputStream());				
 					printMsg("서버 접속 성공");
 					
-					String Conn = "/10000000/";
+					String Conn = "C/10000000/";
 					
 					String CarNum = CarName.getText();
 					
