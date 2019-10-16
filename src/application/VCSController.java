@@ -369,7 +369,7 @@ public class VCSController {
 		Conn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				String portName = "COM4";
+				String portName = "COM7";
 				connectPort(portName);
 				
 			}

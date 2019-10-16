@@ -73,6 +73,7 @@ public class VIController {
 		State.appendText(msg + "\n");
 	}
 	
+	String CarStatus = null;
 	
 	// inner class형식으로 event처리 listener class를 작성
 	class MyPortListener implements SerialPortEventListener{
@@ -94,7 +95,7 @@ public class VIController {
 		
 		String CarStart = null;
 		String CarError = null;
-		String CarStatus = null;
+//		String CarStatus = null;
 		String Battery1 = null;
 		String Temperature = null;
 		String DestLati = null;
@@ -322,6 +323,7 @@ public class VIController {
 					String CarNum = CarName.getText();
 					if(line.contains("C/10000001/"+CarNum)) {
 						CompleteState.setText("회수중");
+						CarStatus = "03";
 						printMsg("회수중");
 						String msg = ":W2800000013000000000000000045\r";
 						byte[] inputData = msg.getBytes();
@@ -344,7 +346,7 @@ public class VIController {
 		Conn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {			
-				String portName = "COM7";
+				String portName = "COM6";
 				connectPort(portName);
 						
 			}
