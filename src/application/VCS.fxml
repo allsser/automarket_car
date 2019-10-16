@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="562.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.VCSController">
+<AnchorPane prefHeight="562.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.VCSController">
    <children>
       <TextArea fx:id="State" layoutX="8.0" layoutY="309.0" prefHeight="249.0" prefWidth="606.0" />
       <Button fx:id="EngineOFF" layoutX="141.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="OFF" textAlignment="CENTER" />
@@ -66,8 +66,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="Delivery" layoutX="94.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="이동중" textAlignment="CENTER" />
-      <Button fx:id="Arrival" layoutX="162.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="110.0" text="배송완료" textAlignment="CENTER" />
+      <Button fx:id="Delivery" layoutX="106.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="이동중" textAlignment="CENTER" />
+      <Button fx:id="Arrival" layoutX="187.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="도착" textAlignment="CENTER" />
       <Button fx:id="Temp" layoutX="174.0" layoutY="116.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
       <Button fx:id="Battery" layoutX="538.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="등록" textAlignment="CENTER" />
       <Button fx:id="Conn" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="134.0" text="COM연결" textAlignment="CENTER" />
@@ -84,7 +84,7 @@
       </Label>
       <Button fx:id="GoodState" layoutX="12.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="78.0" text="기본값" textAlignment="CENTER" />
       <Button fx:id="Complete" layoutX="346.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="110.0" text="회수완료" textAlignment="CENTER" />
-      <Button fx:id="Recall" layoutX="275.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="회수중" textAlignment="CENTER" />
+      <Button fx:id="Recall" layoutX="269.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickHandler" prefHeight="34.0" prefWidth="67.0" text="회수중" textAlignment="CENTER" />
       <TextField fx:id="CompleteState" alignment="CENTER" layoutX="466.0" layoutY="264.0" prefHeight="34.0" prefWidth="134.0" />
    </children>
 </AnchorPane>

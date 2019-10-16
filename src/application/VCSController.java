@@ -267,8 +267,8 @@ public class VCSController {
 		Arrival.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				CompleteState.setText("배송완료");
-				printMsg("배송완료");
+				CompleteState.setText("도착");
+				printMsg("도착");
 				String msg = ":W280000000900000000000000004A\r";
 				byte[] inputData = msg.getBytes();
 				try {
