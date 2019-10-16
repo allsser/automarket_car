@@ -179,9 +179,9 @@ public class VIController {
 						printMsg("정상");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Delivery)){
-						CompleteState.setText("배달중");
+						CompleteState.setText("이동중");
 						CarStatus = "01";
-						printMsg("배달중");
+						printMsg("이동중");
 						printMsg("받은 메시지는 : " + result);
 					} else if(result.contains(Arrival)){
 						CompleteState.setText("도착");
@@ -318,14 +318,25 @@ public class VIController {
 			String line = "";
 			try {
 				while((line=br.readLine())!=null) {
-					line = "C"+line;
+					
 					printMsg(line +"-> 회수 요청");
 					String CarNum = CarName.getText();
-					if(line.contains("C/10000001/"+CarNum)) {
+					if(line.contains("/10000001/"+CarNum)) {
 						CompleteState.setText("회수중");
 						CarStatus = "03";
 						printMsg("회수중");
 						String msg = ":W2800000013000000000000000045\r";
+						byte[] inputData = msg.getBytes();
+						try {
+							out.write(inputData);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} else if(line.contains("/10000102/"+CarNum)) {
+						CompleteState.setText("이동중");
+						CarStatus = "01";
+						printMsg("회수중");
+						String msg = ":W280000000900000000000000014B\r";
 						byte[] inputData = msg.getBytes();
 						try {
 							out.write(inputData);
@@ -359,7 +370,7 @@ public class VIController {
 			public void handle(ActionEvent event) {			
 				try {
 					// 클라이언트는 버튼을 누르면 서버쪽에 Socket접속을 시도.
-					socket = new Socket("127.0.0.1",7848);
+					socket = new Socket("70.12.115.50",6789);
 					// 만약에 접속에 성공하면 socket객체를 하나 획득.
 					
 					br = new BufferedReader(new InputStreamReader(socket.getInputStream()));

@@ -10,10 +10,10 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception{
-		Parent root = FXMLLoader.load(getClass().getResource("VI.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("VCS.fxml"));
 		Scene scene = new Scene(root);
 		
-		primaryStage.setTitle("VI");
+		primaryStage.setTitle("VCS");
 		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();
