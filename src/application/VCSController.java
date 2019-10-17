@@ -98,6 +98,7 @@ public class VCSController {
 	class MyPortListener implements SerialPortEventListener{
 		
 		String Recall = ":U2800000013000000000000000043";
+		String Delivery = ":U2800000009000000000000000149";
 
 		@Override
 		public void serialEvent(SerialPortEvent event) {
@@ -116,6 +117,10 @@ public class VCSController {
 					if(result.contains(Recall)) {
 						CompleteState.setText("회수중");
 						printMsg("관리자가 회수요청했습니다.");
+						printMsg("받은 메시지는 : "+ result);
+					} else if(result.contains(Delivery)) {
+						CompleteState.setText("이동중");
+						printMsg("관리자가 이동요청했습니다.");
 						printMsg("받은 메시지는 : "+ result);
 					}
 				} catch (Exception e) {
@@ -369,7 +374,7 @@ public class VCSController {
 		Conn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				String portName = "COM10";
+				String portName = "COM6";
 				connectPort(portName);
 				
 			}

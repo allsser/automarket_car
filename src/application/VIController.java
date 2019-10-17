@@ -319,9 +319,9 @@ public class VIController {
 			try {
 				while((line=br.readLine())!=null) {
 					
-					printMsg(line +"-> 회수 요청");
 					String CarNum = CarName.getText();
 					if(line.contains("/10000001/"+CarNum)) {
+						printMsg(line +"-> 회수 요청");
 						CompleteState.setText("회수중");
 						CarStatus = "03";
 						printMsg("회수중");
@@ -333,9 +333,10 @@ public class VIController {
 							e.printStackTrace();
 						}
 					} else if(line.contains("/10000102/"+CarNum)) {
+						printMsg(line +"-> 이동 요청");
 						CompleteState.setText("이동중");
 						CarStatus = "01";
-						printMsg("회수중");
+						printMsg("이동중");
 						String msg = ":W280000000900000000000000014B\r";
 						byte[] inputData = msg.getBytes();
 						try {
